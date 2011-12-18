@@ -19,11 +19,10 @@
         <!--<div id="cart"> -->
         <div  id="cart"
         <%  if  @cart.line_items.empty?  %>
-                style="display:  none"
+                style="display:  none">
               <%  end  %>
-              >
-                <%=  render(@cart)  %>
-        </div>           
+      </div>
+              <%=  render(@cart)  %>                
       <a href="http://www....">Home</a><br />
       <a href="http://www..../faq">Questions</a><br />
       <a href="http://www..../news">News</a><br />
