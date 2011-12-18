@@ -18,19 +18,20 @@
       <div id="side">
         <!--<div id="cart"> -->
         <div  id="cart"
-        <%  if  @cart.line_items.empty?  %>
-                style="display:  none">
+        <% if @cart.line_items.empty?  %>
+                style="display: none"
               <%  end  %>
+              >
+        </div>
+        <%=  render(@cart)  %>                
+        <a href="http://www....">Home</a><br />
+        <a href="http://www..../faq">Questions</a><br />
+        <a href="http://www..../news">News</a><br />
+        <a href="http://www..../contact">Contact</a><br />
       </div>
-              <%=  render(@cart)  %>                
-      <a href="http://www....">Home</a><br />
-      <a href="http://www..../faq">Questions</a><br />
-      <a href="http://www..../news">News</a><br />
-      <a href="http://www..../contact">Contact</a><br />
+      <div id="main">
+        <%= yield %><!-- <label id="code.depot.e.include"/> -->
+      </div>
     </div>
-    <div id="main">
-      <%= yield %><!-- <label id="code.depot.e.include"/> -->
-    </div>
-  </div>
-</body>
+  </body>
 </html>
