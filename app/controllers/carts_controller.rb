@@ -78,15 +78,12 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.xml
   def destroy
-    @cart = current_cart
-    #@cart = Cart.find(params[:id])    
+    @cart = current_cart        
     @cart.destroy
     session[:cart_id] = nil
 
     respond_to do |format|
-      #format.html { redirect_to(carts_url) }
-      format.html { redirect_to(store_url, :notice => 'Your cart is currently empty 你的購物車已經清空')}
-      #轉向到store_url,並顯現訊息
+      format.html { redirect_to(store_url, :notice => '你的購物車已經清空')}      
       format.xml  { head :ok }
     end
   end

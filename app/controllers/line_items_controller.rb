@@ -41,14 +41,15 @@ class LineItemsController < ApplicationController
   # POST /line_items.xml
   def create
     @cart = current_cart
-    product = Product.find(params[:product_id]) 
-    #@line_item = @cart.line_items.build(:product => product)
+    product = Product.find(params[:product_id])     
     @line_item = @cart.add_product(product.id)
 
     respond_to do |format|
       if @line_item.save
         #format.html { redirect_to(@line_item.cart, :notice => 'Line item was successfully created.') }
-        format.html { redirect_to (@line_item.cart) }
+        #format.html { redirect_to (@line_item.cart) } 原先是轉至購物車現在是設為轉為商店的store_url
+        format.html  { redirect_to(store_url, :notice => 'ohyes') }
+        format.js    { @current_item = @line_item }
         format.xml  { render :xml => @line_item, :status => :created, :location => @line_item }
       else
         format.html { render :action => "new" }
@@ -56,7 +57,7 @@ class LineItemsController < ApplicationController
       end
     end
   end
-
+ 
   # PUT /line_items/1
   # PUT /line_items/1.xml
   def update
