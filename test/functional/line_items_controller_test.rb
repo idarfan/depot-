@@ -11,7 +11,17 @@ class LineItemsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:line_items)
   end
 
+  test "requires item in cart" do
+    get :new
+    assert_redirected_to store_path
+    assert_equal flash[:notice], 'Your cart is empty'
+  end
+  
   test "should get new" do
+    cart  =  Cart.create
+    session[:cart_id]  =  cart.id
+    LineItem.create(:cart  =>  cart,  :product  =>  products(:ruby))
+
     get :new
     assert_response :success
   end
@@ -47,7 +57,7 @@ class LineItemsControllerTest < ActionController::TestCase
     assert_redirected_to line_items_path
   end
   
-   test "should create line_item via ajax" do
+  test "should create line_item via ajax" do
     assert_difference('LineItem.count') do
       xhr :post, :create, :product_id => products(:ruby).id
     end 
